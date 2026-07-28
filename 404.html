@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Página não encontrada — Kimassa Alimentos</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .perdido {
+    min-height: 100dvh;
+    display: grid;
+    place-content: center;
+    text-align: center;
+    background: var(--azul);
+    color: var(--branco);
+    padding: 2rem var(--gutter);
+    gap: 1.25rem;
+    justify-items: center;
+  }
+  .perdido img { width: min(260px, 70vw); margin-bottom: 1rem; }
+  .perdido h1 { font-size: clamp(3.5rem, 14vw, 7rem); color: var(--ouro); }
+  .perdido p { color: rgba(255,255,255,.82); max-width: 42ch; }
+</style>
+</head>
+<body>
+  <main class="perdido">
+    <img src="logo/kimassa-azul.svg" alt="Kimassa Alimentos">
+    <h1>404</h1>
+    <div class="selo selo--claro" style="margin-bottom:0">
+      <div class="selo__faixa"><span class="selo__rotulo">Página não encontrada</span></div>
+    </div>
+    <p>Essa página saiu do forno e não voltou. Mas o pão de queijo continua aqui.</p>
+    <a class="btn btn--ouro" href="/Kimassa/">Voltar para o início</a>
+  </main>
+</body>
+</html>

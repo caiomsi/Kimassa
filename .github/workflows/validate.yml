@@ -1,0 +1,67 @@
+name: Validate
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check that every referenced local file exists
+        run: |
+          set -euo pipefail
+          fail=0
+          # src="..." / href="..." / poster="..." pointing at repo-relative paths.
+          # Root-absolute hrefs (/Kimassa/...) resolve against the Pages base, not
+          # the repo, so they're skipped here.
+          grep -rhoE '(src|href|poster)="[^"#:]+"' --include='*.html' --include='*.css' . \
+            | sed -E 's/.*="([^"]+)"/\1/' \
+            | grep -vE '^(https?:|//|/|mailto:|tel:|data:|#)' \
+            | sort -u \
+            | while read -r ref; do
+                [ -e "$ref" ] || { echo "::error::missing asset: $ref"; fail=1; }
+              done
+          # image filenames referenced from the JS catalog
+          grep -oE "image: *'[^']+'" js/config.js | sed -E "s/.*'([^']+)'/\1/" \
+            | while read -r img; do
+                [ -e "$img" ] || { echo "::error::missing catalog image: $img"; fail=1; }
+              done
+          exit $fail
+
+      - name: Check JavaScript parses
+        run: |
+          node --check js/config.js
+          node --check js/main.js
+
+      - name: Check the JSON-LD block is valid JSON
+        run: |
+          python3 - <<'PY'
+          import json, re, sys
+          html = open('index.html', encoding='utf-8').read()
+          blocks = re.findall(
+              r'<script type="application/ld\+json">(.*?)</script>', html, re.S)
+          if not blocks:
+              sys.exit('::error::no JSON-LD block found')
+          for b in blocks:
+              json.loads(b)
+          print(f'{len(blocks)} JSON-LD block(s) OK')
+          PY
+
+      - name: Check the WhatsApp number is still the client's
+        run: |
+          grep -q "5534991498777" js/config.js \
+            || { echo "::error::WHATSAPP_NUMBER changed or is a placeholder"; exit 1; }
+
+      - name: Warn about unreplaced placeholders
+        run: |
+          if grep -rniE 'placehold\.co|REPLACE WITH|lorem ipsum|5534999999999' \
+               --include='*.html' --include='*.css' --include='*.js' . ; then
+            echo "::error::placeholder content still present"
+            exit 1
+          fi
+          echo "no placeholders found"

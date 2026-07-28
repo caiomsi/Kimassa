@@ -1,0 +1,48 @@
+name: Compress images
+
+# Recompresses any newly committed JPEG/PNG in place and pushes the result back,
+# so nobody has to remember to optimise before committing.
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'images/**.jpg'
+      - 'images/**.jpeg'
+      - 'images/**.png'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  compress:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install tools
+        run: sudo apt-get update -qq && sudo apt-get install -y jpegoptim optipng
+
+      - name: Compress
+        run: |
+          # 1600px is the largest size this site ever displays
+          sudo apt-get install -y imagemagick
+          find images -type f \( -iname '*.jpg' -o -iname '*.jpeg' \) -print0 \
+            | xargs -0 -r -I{} sh -c 'mogrify -resize "1600x1600>" "{}"'
+          find images -type f \( -iname '*.jpg' -o -iname '*.jpeg' \) -print0 \
+            | xargs -0 -r jpegoptim --max=80 --strip-all --all-progressive
+          find images -type f -iname '*.png' -print0 \
+            | xargs -0 -r optipng -o3 -strip all
+
+      - name: Commit if anything shrank
+        run: |
+          if [ -n "$(git status --porcelain images)" ]; then
+            git config user.name  "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add images
+            git commit -m "chore: compress images [skip ci]"
+            git push
+          else
+            echo "nothing to compress"
+          fi
