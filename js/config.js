@@ -68,7 +68,7 @@ const PRODUCTS = [
     category: 'tradicional',
     description:
       'O sabor marcante do provolone numa bolinha assada. Vai bem no café, na cerveja e na mesa de petisco.',
-    image: 'images/pao-de-queijo-porcao.jpg',
+    image: 'images/provolito.jpg',
     featured: true,
   },
   {
@@ -77,7 +77,7 @@ const PRODUCTS = [
     category: 'temperados',
     description:
       'A mesma massa, com tempero na medida. Escolha entre o tempero da casa e a calabresa.',
-    image: 'images/pao-de-queijo-assado-mesa.jpg',
+    image: 'images/pao-de-queijo-temperado.jpg',
     featured: true,
     opcoes: ['Tempero da casa', 'Calabresa'],
   },
@@ -87,7 +87,7 @@ const PRODUCTS = [
     category: 'recheados',
     description:
       'Massa tradicional com recheio generoso, que derrete na hora que você morde. Cinco recheios para escolher.',
-    image: 'images/pao-de-queijo-com-cafe.jpg',
+    image: 'images/pao-de-queijo-recheado.jpg',
     featured: true,
     opcoes: [
       'Pernil',
