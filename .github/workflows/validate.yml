@@ -54,7 +54,7 @@ jobs:
 
       - name: Check the WhatsApp number is still the client's
         run: |
-          grep -q "5534991498777" js/config.js \
+          grep -q "5534999680441" js/config.js \
             || { echo "::error::WHATSAPP_NUMBER changed or is a placeholder"; exit 1; }
 
       - name: Warn about unreplaced placeholders

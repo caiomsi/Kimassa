@@ -1,37 +1,32 @@
 /* ==========================================================================
-   KIMASSA ALIMENTOS — comportamento do site
+   KIMASSA VAREJO — comportamento do site
    Depende de js/config.js (PRODUCTS, CATEGORIES, WHATSAPP_NUMBER, FRETE_TEXT).
    Sem framework, sem build. Todo acesso ao DOM é protegido.
+
+   O site NÃO trabalha com preços: o visitante monta uma lista de pedido e
+   pede orçamento pelo WhatsApp. Não há totais em lugar nenhum.
    ========================================================================== */
 ;(function () {
   'use strict'
 
-  var CHAVE_CARRINHO = 'kimassa_carrinho'
+  var CHAVE_PEDIDO = 'kimassa_pedido'
   var $ = function (sel) { return document.querySelector(sel) }
 
-  var carrinho = carregarCarrinho()
+  var pedido = carregarPedido()
   var categoriaAtiva = 'todos'
-  /* embalagem escolhida por produto, ex.: { tradicional: 1 } */
-  var variantesEscolhidas = {}
+  /* opção escolhida por produto, ex.: { recheado: 2 } */
+  var opcoesEscolhidas = {}
 
   /* ------------------------------------------------------------- utilidades */
-
-  function brl(valor) {
-    return valor.toLocaleString('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-      minimumFractionDigits: 2,
-    })
-  }
 
   function linkZap(mensagem) {
     var base = 'https://wa.me/' + WHATSAPP_NUMBER
     return mensagem ? base + '?text=' + encodeURIComponent(mensagem) : base
   }
 
-  function carregarCarrinho() {
+  function carregarPedido() {
     try {
-      var bruto = localStorage.getItem(CHAVE_CARRINHO)
+      var bruto = localStorage.getItem(CHAVE_PEDIDO)
       var dados = bruto ? JSON.parse(bruto) : []
       return Array.isArray(dados) ? dados : []
     } catch (e) {
@@ -39,11 +34,11 @@
     }
   }
 
-  function salvarCarrinho() {
+  function salvarPedido() {
     try {
-      localStorage.setItem(CHAVE_CARRINHO, JSON.stringify(carrinho))
+      localStorage.setItem(CHAVE_PEDIDO, JSON.stringify(pedido))
     } catch (e) {
-      /* modo privado / cota cheia: o carrinho segue funcionando só nesta sessão */
+      /* modo privado / cota cheia: a lista segue funcionando só nesta sessão */
     }
   }
 
@@ -73,22 +68,26 @@
     '<path d="m12 2 3 6.5 7 1-5 4.9 1.2 7L12 18l-6.2 3.4L7 14.4l-5-4.9 7-1L12 2Z"/></svg>'
 
   function montarCartao(produto) {
-    var indice = variantesEscolhidas[produto.id] || 0
-    var variante = produto.variants[indice]
+    var opcoes = produto.opcoes || []
+    var indice = opcoesEscolhidas[produto.id] || 0
 
     var art = document.createElement('article')
     art.className = 'produto revelar'
     art.dataset.categoria = produto.category
 
-    var pills = produto.variants
-      .map(function (v, i) {
-        return (
-          '<button type="button" class="variante" data-produto="' + produto.id +
-          '" data-indice="' + i + '" aria-pressed="' + (i === indice) + '">' +
-          v.label + '</button>'
-        )
-      })
-      .join('')
+    var pills = opcoes.length
+      ? '<div class="variantes">' +
+          opcoes
+            .map(function (rotulo, i) {
+              return (
+                '<button type="button" class="variante" data-produto="' + produto.id +
+                '" data-indice="' + i + '" aria-pressed="' + (i === indice) + '">' +
+                rotulo + '</button>'
+              )
+            })
+            .join('') +
+        '</div>'
+      : ''
 
     art.innerHTML =
       '<div class="produto__foto">' +
@@ -96,7 +95,7 @@
           ? '<span class="produto__selo">' + ESTRELA + 'Mais pedido</span>'
           : '') +
         '<img src="' + produto.image + '" alt="' + produto.name +
-        '" loading="lazy" width="600" height="450">' +
+        '" loading="lazy" width="600" height="600">' +
       '</div>' +
       '<div class="produto__corpo">' +
         '<span class="produto__categoria">' +
@@ -104,13 +103,10 @@
         '</span>' +
         '<h3>' + produto.name + '</h3>' +
         '<p class="produto__desc">' + produto.description + '</p>' +
-        '<div class="variantes">' + pills + '</div>' +
+        pills +
         '<div class="produto__base">' +
-          /* the selected pill above already names the pack, so the price row
-             stays a single clean number */
-          '<span class="preco">' + brl(variante.price) + '</span>' +
-          '<button type="button" class="btn btn--primario adicionar" data-produto="' +
-            produto.id + '">Adicionar</button>' +
+          '<button type="button" class="btn btn--primario btn--bloco adicionar" ' +
+            'data-produto="' + produto.id + '">Adicionar ao pedido</button>' +
         '</div>' +
       '</div>'
 
@@ -122,11 +118,9 @@
     if (!grade) return
     grade.innerHTML = ''
 
-    var visiveis = PRODUCTS.filter(function (p) {
+    PRODUCTS.filter(function (p) {
       return categoriaAtiva === 'todos' || p.category === categoriaAtiva
-    })
-
-    visiveis.forEach(function (p) {
+    }).forEach(function (p) {
       grade.appendChild(montarCartao(p))
     })
     observarRevelacao(grade)
@@ -175,7 +169,7 @@
     }
 
     if (alvo.classList.contains('variante')) {
-      variantesEscolhidas[alvo.dataset.produto] = parseInt(alvo.dataset.indice, 10)
+      opcoesEscolhidas[alvo.dataset.produto] = parseInt(alvo.dataset.indice, 10)
       renderizarDestaques()
       renderizarCatalogo()
       return
@@ -186,20 +180,19 @@
     }
   })
 
-  /* ------------------------------------------------------------- carrinho */
+  /* --------------------------------------------------------- lista de pedido */
 
   function adicionar(idProduto) {
     var produto = acharProduto(idProduto)
     if (!produto) return
 
-    var indice = variantesEscolhidas[idProduto] || 0
-    var variante = produto.variants[indice]
-    if (!variante) return
+    var opcoes = produto.opcoes || []
+    var opcao = opcoes.length ? opcoes[opcoesEscolhidas[idProduto] || 0] : ''
 
     var existente = null
-    for (var i = 0; i < carrinho.length; i++) {
-      if (carrinho[i].id === idProduto && carrinho[i].variante === variante.label) {
-        existente = carrinho[i]
+    for (var i = 0; i < pedido.length; i++) {
+      if (pedido[i].id === idProduto && pedido[i].opcao === opcao) {
+        existente = pedido[i]
         break
       }
     }
@@ -207,43 +200,35 @@
     if (existente) {
       existente.qtd += 1
     } else {
-      carrinho.push({
+      pedido.push({
         id: idProduto,
         nome: produto.name,
-        variante: variante.label,
-        preco: variante.price,
+        opcao: opcao,
         imagem: produto.image,
         qtd: 1,
       })
     }
 
-    salvarCarrinho()
-    atualizarCarrinho()
+    salvarPedido()
+    atualizarPedido()
     avisar(produto.name + ' adicionado ao pedido')
   }
 
   function mudarQtd(indice, delta) {
-    var item = carrinho[indice]
+    var item = pedido[indice]
     if (!item) return
     item.qtd += delta
-    if (item.qtd <= 0) carrinho.splice(indice, 1)
-    salvarCarrinho()
-    atualizarCarrinho()
+    if (item.qtd <= 0) pedido.splice(indice, 1)
+    salvarPedido()
+    atualizarPedido()
   }
 
-  function totalCarrinho() {
-    return carrinho.reduce(function (soma, item) {
-      return soma + item.preco * item.qtd
-    }, 0)
-  }
-
-  function atualizarCarrinho() {
+  function atualizarPedido() {
     var contador = $('#carrinho-contador')
     var itens = $('#gaveta-itens')
     var base = $('#gaveta-base')
-    var total = $('#gaveta-total')
 
-    var pecas = carrinho.reduce(function (soma, item) {
+    var pecas = pedido.reduce(function (soma, item) {
       return soma + item.qtd
     }, 0)
 
@@ -254,26 +239,28 @@
 
     if (!itens) return
 
-    if (carrinho.length === 0) {
+    if (pedido.length === 0) {
       itens.innerHTML =
         '<div class="gaveta__vazio">' +
           '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">' +
           '<circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>' +
           '<path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>' +
-          '<p>Seu pedido está vazio.<br>Escolha um pão de queijo para começar.</p>' +
+          '<p>Sua lista está vazia.<br>Escolha um produto para começar.</p>' +
         '</div>'
       if (base) base.hidden = true
       return
     }
 
-    itens.innerHTML = carrinho
+    itens.innerHTML = pedido
       .map(function (item, i) {
         return (
           '<div class="item">' +
             '<img src="' + item.imagem + '" alt="" width="72" height="72">' +
             '<div>' +
               '<h3>' + item.nome + '</h3>' +
-              '<span class="item__variante">' + item.variante + '</span>' +
+              (item.opcao
+                ? '<span class="item__variante">' + item.opcao + '</span>'
+                : '') +
               '<div class="item__linha">' +
                 '<span class="qtd">' +
                   '<button type="button" data-acao="menos" data-i="' + i +
@@ -282,7 +269,6 @@
                   '<button type="button" data-acao="mais" data-i="' + i +
                     '" aria-label="Aumentar quantidade">+</button>' +
                 '</span>' +
-                '<span class="item__preco">' + brl(item.preco * item.qtd) + '</span>' +
               '</div>' +
             '</div>' +
           '</div>'
@@ -291,7 +277,6 @@
       .join('')
 
     if (base) base.hidden = false
-    if (total) total.textContent = brl(totalCarrinho())
   }
 
   var itensGaveta = $('#gaveta-itens')
@@ -344,20 +329,17 @@
     if (ev.key === 'Escape') fecharGaveta()
   })
 
-  /* ------------------------------------------------------------- checkout */
+  /* ------------------------------------------------------------- orçamento */
 
   function mensagemPedido() {
-    var linhas = ['*Pedido pelo site — Kimassa Alimentos*', '']
-    carrinho.forEach(function (item) {
+    var linhas = ['*Pedido pelo site — Kimassa Varejo*', '']
+    pedido.forEach(function (item) {
       linhas.push(
-        '• ' + item.qtd + 'x ' + item.nome + ' (' + item.variante + ') — ' +
-        brl(item.preco * item.qtd)
+        '• ' + item.qtd + 'x ' + item.nome + (item.opcao ? ' — ' + item.opcao : '')
       )
     })
     linhas.push('')
-    linhas.push('*Total: ' + brl(totalCarrinho()) + '*')
-    linhas.push('')
-    linhas.push('Gostaria de combinar a entrega, por favor.')
+    linhas.push('Gostaria de saber o valor destes itens e o preço da entrega, por favor.')
     return linhas.join('\n')
   }
 
@@ -365,22 +347,22 @@
   if (btnFinalizar) {
     btnFinalizar.addEventListener('click', function (ev) {
       ev.preventDefault()
-      if (carrinho.length === 0) {
-        avisar('Seu pedido ainda está vazio')
+      if (pedido.length === 0) {
+        avisar('Sua lista ainda está vazia')
         return
       }
       window.open(linkZap(mensagemPedido()), '_blank', 'noopener')
     })
   }
 
-  /* Links de WhatsApp que não dependem do carrinho */
+  /* Links de WhatsApp que não dependem da lista */
   var atalhos = [
     ['#zap-flutuante', 'Olá! Vim pelo site da Kimassa e gostaria de fazer um pedido.'],
     ['#hero-zap', 'Olá! Vim pelo site da Kimassa e gostaria de fazer um pedido.'],
     ['#contato-zap', 'Olá! Vim pelo site da Kimassa e gostaria de tirar uma dúvida.'],
     ['#contato-zap-btn', 'Olá! Vim pelo site da Kimassa e gostaria de tirar uma dúvida.'],
     ['#rodape-zap', 'Olá! Vim pelo site da Kimassa e gostaria de fazer um pedido.'],
-    ['#entrega-zap', 'Olá! Gostaria de saber se vocês entregam no meu bairro em Uberlândia.'],
+    ['#entrega-zap', 'Olá! Gostaria de saber o preço da entrega para o meu bairro em Uberlândia.'],
   ]
   atalhos.forEach(function (par) {
     var el = $(par[0])
@@ -447,6 +429,6 @@
   renderizarFiltros()
   renderizarDestaques()
   renderizarCatalogo()
-  atualizarCarrinho()
+  atualizarPedido()
   observarRevelacao(document)
 })()

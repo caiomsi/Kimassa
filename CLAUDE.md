@@ -4,10 +4,10 @@ This file provides guidance to Claude Code when working in this repository.
 
 ## What this is
 
-**Kimassa Alimentos** — a **real client**: a company in Uberlândia (MG, Brazil) that
+**Kimassa Varejo** — a **real client**: a company in Uberlândia (MG, Brazil) that
 makes and sells **frozen pão de queijo** (pão de queijo congelado). All content is
-pt-BR. It is a product **showcase + cart + WhatsApp checkout** (no payment backend),
-plus a company-history section. Static HTML/CSS/JS, no build step. See the root
+pt-BR. It is a product **showcase + order list + WhatsApp quote request** (no prices,
+no payment backend). Static HTML/CSS/JS, no build step. See the root
 `../CLAUDE.md` for shared conventions.
 
 This replaces the earlier `Pao-da-Roca/` attempt, which used a placeholder brand name
@@ -29,13 +29,13 @@ Use it for new sections rather than inventing another heading treatment.
 
 The rest follows from it:
 
-- **Blue is architecture** (header, hero, história band, footer), **warm off-white is
+- **Blue is architecture** (header, hero, preparo band, footer), **warm off-white is
   the gallery** the food photography hangs in. The client's photos are warm and
   domestic while the brand is bold and institutional — the cream ground is what
   reconciles them. Don't put food photos directly on blue.
-- **Red is punctuation, never a surface**: the rules, CTAs, price tags, cart badge.
+- **Red is punctuation, never a surface**: the rules, CTAs, badges, cart count.
 - **Gold is reward**: stars, "mais pedido" badges, hover states.
-- **Antonio uppercase for everything structural** (headings, prices, nav, quantities);
+- **Antonio uppercase for everything structural** (headings, nav, quantities);
   **Lato** for all reading text. Both are specified in the client's identity manual.
 
 Tokens live at the top of `css/style.css` — `--azul #1E4899`, `--vermelho #E4191C`,
@@ -71,18 +71,26 @@ unpredictably. Mark bounds: x 145.5–451.5; y 182.5–336.75 (blue), 404.24–5
 ## Catálogo — hardcoded in `js/config.js`
 
 The whole store is driven by `js/config.js` (no spreadsheet, no CMS): `PRODUCTS`
-(each with `variants` = pack size + its own price), `CATEGORIES`, `WHATSAPP_NUMBER`,
-and `FRETE_TEXT` (the scrolling top bar). The comment block at the top of the file is
-written **for the client** — keep it in plain Portuguese and keep it accurate.
+(each with an optional `opcoes` array of flavour names), `CATEGORIES`,
+`WHATSAPP_NUMBER`, and `FRETE_TEXT` (the scrolling top bar). The comment block at the
+top of the file is written **for the client** — keep it in plain Portuguese and keep
+it accurate.
 
-Edit that file to change products or prices. Nothing else should need touching.
+Edit that file to change products. Nothing else should need touching.
 
-## Checkout — WhatsApp only
+## No prices — the site collects a list and quotes over WhatsApp
 
-`js/main.js` builds a pre-filled `wa.me` message (items, chosen pack, quantity, BRL
-total). The cart is a slide-in drawer, persisted to `localStorage` under
-`kimassa_carrinho`, keyed by product id + variant label. No MSI-Forms — WhatsApp is
-the entire order flow.
+**There are no prices anywhere on this site, by client decision (2026-08-10).** The
+client supplied a product lineup with no price table, and the delivery price varies by
+neighbourhood and order size, so publishing anything would have been invented.
+
+The drawer is a *lista de pedido*, not a cart: no unit price, no total, no `brl()`
+formatting. `js/main.js` builds a `wa.me` message listing items, chosen flavour and
+quantity, ending with a request for the price of the items **and** the delivery.
+Persisted to `localStorage` under `kimassa_pedido`, keyed by product id + flavour.
+
+If the client later sends a price table, prices come back by adding a `preco` to each
+option and restoring the total row — but don't do it speculatively.
 
 Product cards are re-rendered on every filter change, so card interactions use a
 single delegated listener on `document` rather than per-card handlers. Keep it that
@@ -90,23 +98,46 @@ way when adding card controls.
 
 ## Real client data — already live, don't placeholder it
 
-From the identity manual's business card. **This is real and correct:**
+Supplied directly by the client on 2026-08-10. **This is current and correct:**
 
-- WhatsApp `5534991498777` — (34) 99149-8777
-- Landline (34) 3305-0009 · `kimassa.alimentos@yahoo.com`
-- Rua Pio XXI, 130 — Lagoinha, Uberlândia — MG
-- Fernando Honorato, Diretor Executivo
+- WhatsApp `5534999680441` — (34) 99968-0441
+- `kimassavarejo@gmail.com`
+- Rua Pio XXI, **152** — Lagoinha, Uberlândia — MG
+- Seg–Sex 8h30–12h and 13h30–17h30 · Sáb 8h–12h
 
-## Still placeholder — confirm before promoting the site
+Superseded and **removed** from the site: the old (34) 99149-8777 WhatsApp, the
+`kimassa.alimentos@yahoo.com` address, and no. 130. The landline (34) 3305-0009 came
+from the old Kimassa Alimentos business card and was **not** in the client's new
+contact block — it's dropped as unverified rather than published possibly dead.
+Fernando Honorato left the page with the história section, so he's also out of the
+JSON-LD (structured data has to match visible content).
 
-- **Product names, pack sizes and prices** in `js/config.js` (marked with ⚠️)
-- **Opening hours** in the JSON-LD and the contact section (assumed 8–18 / Sat 8–12)
+## The logo still reads ALIMENTOS — deliberate
+
+The brand on the site is **Kimassa Varejo**, but the logo lockup still carries
+"ALIMENTOS" under the wordmark. That's the client's call (2026-08-10): Alimentos
+remains the parent/legal entity. **Don't "fix" this.** If they later want a VAREJO
+lockup, the sub-word is 9 isolable paths in each SVG (grey fill in `kimassa.svg`,
+white in the other two) and can be swapped for letterspaced `<text>`.
+
+## Still open — confirm before promoting the site
+
+- **"Nossa história" is cut out entirely.** The client explicitly asked for a "como a
+  Kimassa surgiu" section but hasn't written it. Rather than run invented copy on a
+  real client's site, the section was removed on 2026-08-10 — put it back as soon as
+  they send the text. The blue band it used to carry was moved onto *preparo* so the
+  page still has a mid-page blue anchor; restoring história means deciding which
+  section keeps the blue.
+- **Product descriptions** in `js/config.js` are written by inference from the names.
+- **"Massa própria — produzida aqui, sem terceirizar"** in the trust bar is an
+  unverified claim about their operation. Confirm or cut.
 - **Geo coordinates** in the JSON-LD are Uberlândia city centre, not the exact address
 - **CEP** in the JSON-LD is `38400-000` (generic Uberlândia)
 - **Instagram/Facebook** — no `sameAs` links yet, client hasn't given handles
-- **The company history text** is written from plausible inference, not from Fernando.
-  Get the real founding story before this counts as finished copy.
 - **AI-generated product images** — see `images/README.md`
+
+Confirmed correct by the client and **not** to be softened: *transporte refrigerado*
+and *assa em 20 minutos*.
 
 ## Verifying changes
 

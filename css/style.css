@@ -1,5 +1,5 @@
 /* ==========================================================================
-   KIMASSA ALIMENTOS — "O Selo"
+   KIMASSA VAREJO — "O Selo"
    Design language: the logo's own device (a wordmark bracketed by double rules,
    crowned by three stars) is the site's single structural motif. Blue is
    architecture, warm off-white is the gallery the food photography hangs in,
@@ -69,7 +69,6 @@ html { overflow-x: clip; }
 
 /* grid and flex children default to min-width:auto, which lets long words and
    wide replaced elements push a track past its share */
-.historia > *,
 .entrega > *,
 .contato > *,
 .produto__corpo { min-width: 0; }
@@ -664,7 +663,6 @@ button {
 .produto__desc {
   font-size: 0.95rem;
   color: var(--tinta-media);
-  flex: 1;
 }
 
 .variantes {
@@ -695,59 +693,10 @@ button {
   gap: 0.85rem;
   margin-top: 0.3rem;
 }
-.preco {
-  font-family: var(--display);
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: var(--azul);
-  line-height: 1;
-}
-.produto__base { align-items: flex-end; }
-.produto__base .btn { padding: 0.75rem 1.15rem; font-size: 0.88rem; flex: none; }
-
-/* ------------------------------------------------------------ 10. História */
-.historia {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(2rem, 5vw, 4.5rem);
-  align-items: center;
-}
-.historia__fotos {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
-.historia__fotos img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: var(--raio);
-  box-shadow: var(--sombra);
-}
-.historia__fotos img:first-child {
-  grid-row: span 2;
-  aspect-ratio: 3 / 4;
-}
-.historia__fotos img:not(:first-child) { aspect-ratio: 4 / 3; }
-
-.historia__texto p { color: rgba(255, 255, 255, 0.84); }
-.historia__assinatura {
-  margin-top: 2rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.22);
-}
-.historia__assinatura strong {
-  display: block;
-  font-family: var(--display);
-  font-size: 1.15rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--ouro);
-}
-.historia__assinatura span {
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.65);
-}
+/* No prices anywhere: the store collects a list and the quote comes back over
+   WhatsApp, so the card foot is just the action. */
+.produto__base { margin-top: auto; padding-top: 0.35rem; }
+.produto__base .btn { padding: 0.8rem 1.15rem; font-size: 0.88rem; }
 
 /* --------------------------------------------------------------- 11. Passos */
 .passos {
@@ -996,7 +945,7 @@ button {
   gap: 0.6rem;
   margin-top: 0.5rem;
 }
-.item__preco { font-family: var(--display); font-size: 1.1rem; color: var(--azul); }
+.item__linha { justify-content: flex-start; }
 
 .qtd {
   display: inline-flex;
@@ -1029,23 +978,6 @@ button {
   background: var(--branco);
   display: grid;
   gap: 1rem;
-}
-.gaveta__total {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-}
-.gaveta__total span {
-  font-family: var(--display);
-  font-size: 0.92rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--tinta-media);
-}
-.gaveta__total strong {
-  font-family: var(--display);
-  font-size: 2rem;
-  color: var(--azul);
 }
 .gaveta__nota {
   font-size: 0.82rem;
@@ -1117,7 +1049,7 @@ button {
   .hero__prova strong { font-size: 1.5rem; }
   .hero__prova span { font-size: 0.78rem; }
 
-  .historia, .entrega, .contato { grid-template-columns: 1fr; }
+  .entrega, .contato { grid-template-columns: 1fr; }
   .passos { grid-template-columns: 1fr; }
   .confianca__grade { grid-template-columns: repeat(2, 1fr); }
   .rodape__grade { grid-template-columns: 1fr 1fr; }
@@ -1147,7 +1079,6 @@ button {
 @media (max-width: 560px) {
   .confianca__grade { grid-template-columns: 1fr; }
   .rodape__grade { grid-template-columns: 1fr; }
-  .historia__fotos img:first-child { grid-row: auto; aspect-ratio: 4 / 3; }
   .produto__base { flex-direction: column; align-items: stretch; }
   .produto__base .btn { width: 100%; }
   .carrinho-botao__texto { display: none; }
