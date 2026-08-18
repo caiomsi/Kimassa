@@ -59,7 +59,7 @@ const PRODUCTS = [
     category: 'tradicional',
     description:
       'A receita mineira de sempre, com queijo de verdade. Casca crocante, miolo puxa-puxa. Do congelador ao forno em 20 minutos.',
-    image: 'images/pao-de-queijo-dourado.jpg',
+    image: 'images/pao-de-queijo-tradicional.jpg',
     featured: true,
   },
   {
@@ -67,7 +67,7 @@ const PRODUCTS = [
     name: 'Provolito',
     category: 'tradicional',
     description:
-      'O sabor marcante do provolone numa bolinha assada. Vai bem no café, na cerveja e na mesa de petisco.',
+      'O sabor marcante do provolone numa casquinha dourada e crocante. Vai bem no café, na cerveja e na mesa de petisco.',
     image: 'images/provolito.jpg',
     featured: true,
   },

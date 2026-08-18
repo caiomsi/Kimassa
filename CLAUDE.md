@@ -112,13 +112,28 @@ contact block — it's dropped as unverified rather than published possibly dead
 Fernando Honorato left the page with the história section, so he's also out of the
 JSON-LD (structured data has to match visible content).
 
-## The logo still reads ALIMENTOS — deliberate
+## The logo sub-word was changed to VAREJO (2026-08-18)
 
-The brand on the site is **Kimassa Varejo**, but the logo lockup still carries
-"ALIMENTOS" under the wordmark. That's the client's call (2026-08-10): Alimentos
-remains the parent/legal entity. **Don't "fix" this.** If they later want a VAREJO
-lockup, the sub-word is 9 isolable paths in each SVG (grey fill in `kimassa.svg`,
-white in the other two) and can be swapped for letterspaced `<text>`.
+All three lockups now read **KIMASSA / VAREJO**, matching the client's real painted
+shopfront sign (see `images/loja-kimassa-uberlandia.jpg`). The earlier decision to
+keep "ALIMENTOS" was reversed once that photo confirmed how the brand is actually
+applied in the world. Note the **product packaging still says ALIMENTOS** — that's
+the parent entity and it is correct on the bag.
+
+The swap is pure vector: the sub-word is drawn as **outlines**, not `<text>`, because
+these SVGs load through `<img>` where external fonts never resolve. Letterforms come
+from **Antonio at wght 670**, chosen by matching the original lettering's stem/cap
+ratio (measured 0.1466; Antonio 650 gives 0.1422, 700 gives 0.1523). They are scaled
+to the measured cap height (13.570), set with the measured inter-glyph gap (10.249)
+and centred on the original sub-word centre (x 295.865).
+
+VAREJO is 86.17 wide against ALIMENTOS' 129.73, so the short red rules that flank it
+were **extended inward** to keep the lockup tight. Their outer ends never moved, so
+the mark's overall width is unchanged.
+
+Script: `scratchpad/varejo.py` in the session that did it; the method is reproducible
+from the numbers above. If the sub-word ever changes again, re-measure rather than
+reusing these constants blindly.
 
 ## Still open — confirm before promoting the site
 
@@ -134,7 +149,9 @@ white in the other two) and can be swapped for letterspaced `<text>`.
 - **Geo coordinates** in the JSON-LD are Uberlândia city centre, not the exact address
 - **CEP** in the JSON-LD is `38400-000` (generic Uberlândia)
 - **Instagram/Facebook** — no `sameAs` links yet, client hasn't given handles
-- **AI-generated product images** — see `images/README.md`
+- **AI-generated product images** — only *broa* and *temperado* are still generated,
+  plus the two preparo step photos. Everything else is now a real client photo.
+  See `images/README.md`.
 
 Confirmed correct by the client and **not** to be softened: *transporte refrigerado*
 and *assa em 20 minutos*.

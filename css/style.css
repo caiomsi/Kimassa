@@ -810,6 +810,16 @@ button {
 .contato__lista span { color: var(--tinta); font-size: 1.05rem; }
 .contato__lista a:hover { color: var(--vermelho); }
 
+/* shopfront photo stacked above the map in the contact column */
+.contato__local { display: grid; gap: 1rem; align-content: start; }
+.contato__local img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+}
+.contato__local .mapa { min-height: 260px; }
+
 .mapa {
   /* the iframe carries width/height attributes for aspect hinting — CSS must
      override them or the 600px intrinsic width blows the grid out on mobile */
