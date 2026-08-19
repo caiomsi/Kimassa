@@ -88,4 +88,4 @@ images/             fotos do cliente e imagens geradas (veja o README de lá)
 video/              vídeo do topo, recodificado para web
 ```
 
-Feito por [Caio·MSI](https://caiomsi.com).
+Feito pela [NEXO STUDIO](https://nexostudioudi.com.br).
