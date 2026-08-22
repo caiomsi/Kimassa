@@ -135,6 +135,18 @@ Script: `scratchpad/varejo.py` in the session that did it; the method is reprodu
 from the numbers above. If the sub-word ever changes again, re-measure rather than
 reusing these constants blindly.
 
+## Catalogue changes the client asked for, 2026-08-18
+
+**Pão de Queijo Recheado was removed** along with its now-empty `recheados` category.
+The lineup is 4 products / 7 flavours: tradicional, provolito, temperado (2), broa (3).
+The hero's flavour-count stat is derived from that — **if products change, update it**
+(`index.html`, `.hero__prova`). `images/pao-de-queijo-recheado.jpg` is a real client
+photo kept on disk but no longer referenced.
+
+Also struck from the copy at the client's request: any mention of **beer** (was in the
+provolito description) and the phrase **"miolo puxa-puxa"** (was in tradicional).
+Don't reintroduce either when rewriting product copy.
+
 ## Still open — confirm before promoting the site
 
 - **"Nossa história" is cut out entirely.** The client explicitly asked for a "como a
@@ -149,8 +161,8 @@ reusing these constants blindly.
 - **Geo coordinates** in the JSON-LD are Uberlândia city centre, not the exact address
 - **CEP** in the JSON-LD is `38400-000` (generic Uberlândia)
 - **Instagram/Facebook** — no `sameAs` links yet, client hasn't given handles
-- **AI-generated product images** — only *broa* and *temperado* are still generated,
-  plus the two preparo step photos. Everything else is now a real client photo.
+- **AI-generated product images** — only *broa*, *temperado* and the step-1 freezer
+  photo are still generated. Everything else is a real client photo.
   See `images/README.md`.
 
 Confirmed correct by the client and **not** to be softened: *transporte refrigerado*

@@ -48,7 +48,6 @@ const FRETE_TEXT =
 const CATEGORIES = {
   tradicional: 'Tradicional',
   temperados: 'Temperados',
-  recheados: 'Recheados',
   broas: 'Broas',
 }
 
@@ -58,7 +57,7 @@ const PRODUCTS = [
     name: 'Pão de Queijo Tradicional',
     category: 'tradicional',
     description:
-      'A receita mineira de sempre, com queijo de verdade. Casca crocante, miolo puxa-puxa. Do congelador ao forno em 20 minutos.',
+      'A receita mineira de sempre, com queijo de verdade. Casquinha crocante por fora, macio por dentro. Do congelador ao forno em 20 minutos.',
     image: 'images/pao-de-queijo-tradicional.jpg',
     featured: true,
   },
@@ -67,7 +66,7 @@ const PRODUCTS = [
     name: 'Provolito',
     category: 'tradicional',
     description:
-      'O sabor marcante do provolone numa casquinha dourada e crocante. Vai bem no café, na cerveja e na mesa de petisco.',
+      'O sabor marcante do provolone numa casquinha dourada e crocante. Vai bem no café e na mesa de petisco.',
     image: 'images/provolito.jpg',
     featured: true,
   },
@@ -80,22 +79,6 @@ const PRODUCTS = [
     image: 'images/pao-de-queijo-temperado.jpg',
     featured: true,
     opcoes: ['Tempero da casa', 'Calabresa'],
-  },
-  {
-    id: 'recheado',
-    name: 'Pão de Queijo Recheado',
-    category: 'recheados',
-    description:
-      'Massa tradicional com recheio generoso, que derrete na hora que você morde. Cinco recheios para escolher.',
-    image: 'images/pao-de-queijo-recheado.jpg',
-    featured: true,
-    opcoes: [
-      'Pernil',
-      'Presunto e mussarela',
-      'Goiabada',
-      'Frango',
-      'Requeijão',
-    ],
   },
   {
     id: 'broa',

@@ -14,7 +14,7 @@
 
   var pedido = carregarPedido()
   var categoriaAtiva = 'todos'
-  /* opção escolhida por produto, ex.: { recheado: 2 } */
+  /* opção escolhida por produto, ex.: { temperado: 1 } */
   var opcoesEscolhidas = {}
 
   /* ------------------------------------------------------------- utilidades */

@@ -9,9 +9,10 @@
 | `loja-kimassa-uberlandia.jpg` | fachada da loja, na seção *Contato* (acima do mapa) |
 | `pao-de-queijo-tradicional.jpg` | produto *Tradicional* · imagem de compartilhamento |
 | `provolito.jpg` | produto *Provolito* |
-| `pao-de-queijo-recheado.jpg` | produto *Pão de Queijo Recheado* |
+| `pao-de-queijo-forno.jpg` | passo 2 do preparo (assadeira no forno) |
 | `embalagem-kimassa.jpg` | pacote real, na seção *Entrega* |
 | `pao-de-queijo-com-cafe.jpg` | passo 3 do preparo |
+| `pao-de-queijo-recheado.jpg` | **sem uso** desde 2026-08-18 (o produto recheado saiu do catálogo) |
 | `pao-de-queijo-bandeja-cafe.jpg` | **sem uso** |
 | `pao-de-queijo-porcao.jpg` | **sem uso** |
 | `pao-de-queijo-assado-mesa.jpg` | **sem uso** |
@@ -31,7 +32,6 @@ entidade matriz. Isso está certo e não deve ser "corrigido" para Varejo.
 | `broa.jpg` | Broinhas de fubá redondas, avulsas — algumas com erva-doce, algumas temperadas | **Prioridade alta.** As três versões (doce, doce com erva-doce, temperada) são diferentes entre si e hoje dividem uma foto de conjunto. |
 | `pao-de-queijo-temperado.jpg` | Pão de queijo com cheiro-verde e calabresa, um partido ao meio | **Prioridade alta.** Foto real de cada tempero (tempero da casa e calabresa). |
 | `pao-de-queijo-congelado-bandeja.jpg` | Produto cru e congelado numa assadeira | Foto do produto congelado saindo do freezer (passo 1 do preparo) |
-| `pao-de-queijo-assadeira-forno.jpg` | Assadeira dourada saindo do forno | Foto de uma fornada real (passo 2 do preparo) |
 
 `social-share.jpg` (1200×630) é uma composição feita aqui: logo + foto real do
 tradicional. Regerar se a logo ou a foto de destaque mudarem.
@@ -43,9 +43,11 @@ tradicional. Regerar se a logo ou a foto de destaque mudarem.
   queijo comum, e *broa* aqui é **broinha de fubá** (rolinho redondo de ~30 g), não
   um bolo fatiado.
 - **2026-08-18** — o cliente mandou fotos reais. Entraram tradicional, provolito,
-  recheado, o pacote e a fachada da loja; as versões geradas desses foram apagadas.
-  A foto real confirmou que o **provolito é alongado**, com casca de queijo craquelada
-  — a versão gerada mostrava bolinhas redondas e estava errada.
+  recheado, o pacote, a fachada da loja e a assadeira no forno; as versões geradas
+  desses foram apagadas. A foto real confirmou que o **provolito é alongado**, com
+  casca de queijo craquelada — a versão gerada mostrava bolinhas redondas e estava
+  errada. No mesmo dia o **pão de queijo recheado saiu do catálogo** a pedido do
+  cliente; a foto dele ficou guardada, sem uso.
 
 Se a Kimassa mandar as fotos que faltam, é só trocar o arquivo mantendo o mesmo nome.
 
@@ -53,9 +55,9 @@ Se a Kimassa mandar as fotos que faltam, é só trocar o arquivo mantendo o mesm
 
 - **Broa** e **pão de queijo temperado** de verdade (as duas ainda geradas)
 - **A produção / a fábrica** — para quando a seção *Nossa história* voltar
-- Fotos específicas de cada **recheio** (pernil, presunto e mussarela, goiabada,
-  frango, requeijão), de cada **tempero** e de cada **broa**: hoje cada produto tem
-  uma foto só, e o card não troca a imagem quando o cliente escolhe outro sabor
+- Fotos específicas de cada **tempero** (tempero da casa, calabresa) e de cada
+  **broa** (doce, erva-doce, temperada): hoje cada produto tem uma foto só, e o card
+  não troca a imagem quando o cliente escolhe outro sabor
 
 ## Convenções
 
