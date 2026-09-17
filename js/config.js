@@ -25,8 +25,10 @@
     image       arquivo da foto dentro de images/
     featured    true = aparece na vitrine "Mais pedidos" do topo
     opcoes      sabores/versões desse produto, em lista de textos.
-                O cliente escolhe um antes de colocar no pedido.
-                Se o produto tem versão única, é só apagar a linha.
+                Com 2 ou mais, o cliente escolhe antes de pôr no pedido.
+                Com 1 só, o site não mostra botão de escolha, mas o sabor
+                continua indo junto no WhatsApp.
+                Se o produto não tem sabor nenhum, é só apagar a linha.
 
   ⚠️ O SITE NÃO MOSTRA PREÇOS. O cliente monta o pedido e pede
      orçamento pelo WhatsApp. Se um dia quiser mostrar preços,
@@ -62,12 +64,12 @@ const PRODUCTS = [
     featured: true,
   },
   {
-    id: 'provolito',
-    name: 'Provolito',
+    id: 'biscoito-provolone',
+    name: 'Biscoito Provolone',
     category: 'tradicional',
     description:
       'O sabor marcante do provolone numa casquinha dourada e crocante. Vai bem no café e na mesa de petisco.',
-    image: 'images/provolito.jpg',
+    image: 'images/biscoito-provolone.jpg',
     featured: true,
   },
   {
@@ -75,10 +77,10 @@ const PRODUCTS = [
     name: 'Pão de Queijo Temperado',
     category: 'temperados',
     description:
-      'A mesma massa, com tempero na medida. Escolha entre o tempero da casa e a calabresa.',
+      'A mesma massa de sempre, com calabresa na medida certa. Tempero que aparece na primeira mordida.',
     image: 'images/pao-de-queijo-temperado.jpg',
     featured: true,
-    opcoes: ['Tempero da casa', 'Calabresa'],
+    opcoes: ['Calabresa'],
   },
   {
     id: 'broa',

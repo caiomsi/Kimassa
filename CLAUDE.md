@@ -96,6 +96,10 @@ Product cards are re-rendered on every filter change, so card interactions use a
 single delegated listener on `document` rather than per-card handlers. Keep it that
 way when adding card controls.
 
+A product with a **single** `opcoes` entry renders **no** chooser pills — one option
+isn't a choice, and an always-selected pill reads as broken UI. `adicionar` still
+defaults to `opcoes[0]`, so the flavour keeps reaching the WhatsApp message.
+
 ## Real client data — already live, don't placeholder it
 
 Supplied directly by the client on 2026-08-10. **This is current and correct:**
@@ -138,13 +142,16 @@ reusing these constants blindly.
 ## Catalogue changes the client asked for, 2026-08-18
 
 **Pão de Queijo Recheado was removed** along with its now-empty `recheados` category.
-The lineup is 4 products / 7 flavours: tradicional, provolito, temperado (2), broa (3).
+The lineup is 4 products / 6 flavours: tradicional, biscoito provolone,
+temperado (calabresa only), broa (3). *Provolito* was renamed **Biscoito Provolone**
+and *temperado* lost its "tempero da casa" option on 2026-09-16.
 The hero's flavour-count stat is derived from that — **if products change, update it**
 (`index.html`, `.hero__prova`). `images/pao-de-queijo-recheado.jpg` is a real client
 photo kept on disk but no longer referenced.
 
 Also struck from the copy at the client's request: any mention of **beer** (was in the
-provolito description) and the phrase **"miolo puxa-puxa"** (was in tradicional).
+biscoito provolone description) and the phrase **"miolo puxa-puxa"** (was in
+tradicional).
 Don't reintroduce either when rewriting product copy.
 
 ## Still open — confirm before promoting the site

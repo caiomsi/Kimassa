@@ -75,7 +75,9 @@
     art.className = 'produto revelar'
     art.dataset.categoria = produto.category
 
-    var pills = opcoes.length
+    /* One option is not a choice: show no pills, but `adicionar` still picks
+       opcoes[0], so the flavour keeps riding along in the WhatsApp message. */
+    var pills = opcoes.length > 1
       ? '<div class="variantes">' +
           opcoes
             .map(function (rotulo, i) {
