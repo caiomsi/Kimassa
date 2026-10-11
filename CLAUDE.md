@@ -18,7 +18,11 @@ styling from it.** Kimassa is built from the client's real visual identity.
 
 `index.html` and `404.html` at root, `css/style.css`, `js/config.js` (the catalog —
 see below), `js/main.js`, `logo/`, `images/`, `video/`. Deployed on GitHub Pages at
-`caiomsi.github.io/Kimassa` (no custom domain yet).
+**`kimassavarejo.com.br`** — the `CNAME` file at the repo root is what binds the
+domain to this repo; deleting it reverts the site to `caiomsi.github.io/Kimassa`.
+DNS lives at GoDaddy (`ns63/ns64.domaincontrol.com`), not registro.br, even though
+it's a `.com.br`. Every absolute URL (canonical, OG/Twitter, JSON-LD, sitemap,
+robots) is on the apex — keep them there.
 
 ## Design language — "O Selo"
 

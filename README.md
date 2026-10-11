@@ -3,7 +3,7 @@
 Site da **Kimassa Varejo** — pão de queijo congelado, Uberlândia (MG).
 Vitrine de produtos + lista de pedido + orçamento pelo WhatsApp.
 
-🔗 https://caiomsi.github.io/Kimassa/
+🔗 https://kimassavarejo.com.br/
 
 ---
 

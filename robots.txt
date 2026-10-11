@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://caiomsi.github.io/Kimassa/sitemap.xml
+Sitemap: https://kimassavarejo.com.br/sitemap.xml
