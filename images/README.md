@@ -10,6 +10,7 @@
 | `pao-de-queijo-tradicional.jpg` | produto *Tradicional* · imagem de compartilhamento |
 | `biscoito-provolone.jpg` | produto *Biscoito Provolone* |
 | `pao-de-queijo-forno.jpg` | passo 2 do preparo (assadeira no forno) |
+| `broa.jpg` | produto *Broa* |
 | `embalagem-kimassa.jpg` | pacote real, na seção *Entrega* |
 | `pao-de-queijo-com-cafe.jpg` | passo 3 do preparo |
 | `pao-de-queijo-recheado.jpg` | **sem uso** desde 2026-08-18 (o produto recheado saiu do catálogo) |
@@ -29,7 +30,6 @@ entidade matriz. Isso está certo e não deve ser "corrigido" para Varejo.
 
 | Arquivo | O que mostra | Foto real necessária |
 |---|---|---|
-| `broa.jpg` | Broinhas de fubá redondas, avulsas — algumas com erva-doce, algumas temperadas | **Prioridade alta.** As três versões (doce, doce com erva-doce, temperada) são diferentes entre si e hoje dividem uma foto de conjunto. |
 | `pao-de-queijo-temperado.jpg` | Pão de queijo com cheiro-verde e calabresa, um partido ao meio | **Prioridade alta.** Foto real do temperado com calabresa — hoje é o único tempero do catálogo. |
 | `pao-de-queijo-congelado-bandeja.jpg` | Produto cru e congelado numa assadeira | Foto do produto congelado saindo do freezer (passo 1 do preparo) |
 
@@ -53,14 +53,17 @@ tradicional. Regerar se a logo ou a foto de destaque mudarem.
   renomeado junto) e o **pão de queijo temperado ficou só com calabresa**; o tempero
   da casa saiu do catálogo.
 
+- **2026-10-11** — entrou a foto nova da **broa** (tigela de broinhas redondas com
+  café), substituindo a gerada. Sobra só o *temperado* como imagem gerada.
+
 Se a Kimassa mandar as fotos que faltam, é só trocar o arquivo mantendo o mesmo nome.
 
 ## Fotos que ainda faltam
 
-- **Broa** e **pão de queijo temperado** de verdade (as duas ainda geradas)
+- **Pão de queijo temperado** de verdade — é a última foto de produto ainda gerada
 - **A produção / a fábrica** — para quando a seção *Nossa história* voltar
-- Fotos de cada **broa** (doce, erva-doce, temperada): as três dividem uma foto de
-  conjunto, e o card não troca a imagem quando o cliente escolhe outro sabor
+- Fotos de cada **broa** (doce, erva-doce, temperada): as três dividem a mesma foto
+  de conjunto, e o card não troca a imagem quando o cliente escolhe outro sabor
 
 ## Convenções
 

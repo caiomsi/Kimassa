@@ -60,10 +60,10 @@ O GitHub Pages publica sozinho depois do push.
       partir dos nomes. Revisem.
 - [ ] **"Massa própria — produzida aqui, sem terceirizar"** na faixa de selos:
       confirmar se está certo ou tirar.
-- [ ] **Fotos reais da broa e do pão de queijo temperado** — são as duas últimas
-      fotos de produto geradas por IA que ainda estão no site, veja `images/README.md`.
-      As fotos da loja, do biscoito provolone, do tradicional, do pacote e da assadeira no
-      forno já são reais.
+- [ ] **Foto real do pão de queijo temperado** — é a última foto de produto gerada
+      por IA que ainda está no site, veja `images/README.md`. A loja, o biscoito
+      provolone, o tradicional, a broa, o pacote e a assadeira no forno já são fotos
+      de verdade.
 - [ ] **Telefone fixo** — o (34) 3305-0009 saiu do site porque não veio na lista de
       contatos nova. Se ainda funciona, é só avisar que a gente coloca de volta.
 - [ ] **Instagram / Facebook** — ainda não há links
