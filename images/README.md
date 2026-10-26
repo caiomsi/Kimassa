@@ -13,7 +13,7 @@
 | `broa.jpg` | produto *Broa* |
 | `embalagem-kimassa.jpg` | pacote real, na seção *Entrega* |
 | `pao-de-queijo-com-cafe.jpg` | passo 3 do preparo |
-| `pao-de-queijo-recheado.jpg` | **sem uso** desde 2026-08-18 (o produto recheado saiu do catálogo) |
+| `pao-de-queijo-recheado.jpg` | produto *Recheado* — voltou ao catálogo em 2026-10-26 |
 | `pao-de-queijo-bandeja-cafe.jpg` | **sem uso** |
 | `pao-de-queijo-porcao.jpg` | **sem uso** |
 | `pao-de-queijo-assado-mesa.jpg` | **sem uso** |
@@ -32,6 +32,7 @@ entidade matriz. Isso está certo e não deve ser "corrigido" para Varejo.
 |---|---|---|
 | `pao-de-queijo-temperado.jpg` | Pão de queijo com cheiro-verde e calabresa, um partido ao meio | **Prioridade alta.** Foto real do temperado com calabresa — hoje é o único tempero do catálogo. |
 | `pao-de-queijo-congelado-bandeja.jpg` | Produto cru e congelado numa assadeira | Foto do produto congelado saindo do freezer (passo 1 do preparo) |
+| `pao-de-queijo-ferradura.jpg` | Pão de queijo assado inteiro em formato de ferradura, numa tábua de madeira | Produto novo (2026-10-26), ainda sem foto real do cliente |
 
 `social-share.jpg` (1200×630) é uma composição feita aqui: logo + foto real do
 tradicional. Regerar se a logo ou a foto de destaque mudarem.
@@ -56,14 +57,22 @@ tradicional. Regerar se a logo ou a foto de destaque mudarem.
 - **2026-10-11** — entrou a foto nova da **broa** (tigela de broinhas redondas com
   café), substituindo a gerada. Sobra só o *temperado* como imagem gerada.
 
+- **2026-10-26** — o **pão de queijo recheado** voltou ao catálogo, agora com 5
+  sabores (pernil, presunto e mussarela, goiabada, frango, requeijão); a foto real
+  guardada desde 2026-08-18 voltou a ser usada, sem precisar gerar nada. Entrou
+  também o **pão de queijo ferradura**, produto novo sem foto real ainda — a imagem
+  é gerada, igual ao temperado.
+
 Se a Kimassa mandar as fotos que faltam, é só trocar o arquivo mantendo o mesmo nome.
 
 ## Fotos que ainda faltam
 
-- **Pão de queijo temperado** de verdade — é a última foto de produto ainda gerada
+- **Pão de queijo temperado** de verdade — ainda é imagem gerada
+- **Pão de queijo ferradura** de verdade — produto novo, ainda é imagem gerada
 - **A produção / a fábrica** — para quando a seção *Nossa história* voltar
 - Fotos de cada **broa** (doce, erva-doce, temperada): as três dividem a mesma foto
   de conjunto, e o card não troca a imagem quando o cliente escolhe outro sabor
+- Foto real de cada sabor do **recheado** (hoje as 5 opções dividem a mesma foto)
 
 ## Convenções
 

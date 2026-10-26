@@ -49,6 +49,7 @@ const FRETE_TEXT =
 // Categorias da loja (chave interna : nome que aparece)
 const CATEGORIES = {
   tradicional: 'Tradicional',
+  recheados: 'Recheados',
   temperados: 'Temperados',
   broas: 'Broas',
 }
@@ -71,6 +72,25 @@ const PRODUCTS = [
       'O sabor marcante do provolone numa casquinha dourada e crocante. Vai bem no café e na mesa de petisco.',
     image: 'images/biscoito-provolone.jpg',
     featured: true,
+  },
+  {
+    id: 'ferradura',
+    name: 'Pão de Queijo Ferradura',
+    category: 'tradicional',
+    description:
+      'A mesma receita tradicional, assada inteira em formato de ferradura. Para dividir à mesa.',
+    image: 'images/pao-de-queijo-ferradura.jpg',
+    featured: false,
+  },
+  {
+    id: 'recheado',
+    name: 'Pão de Queijo Recheado',
+    category: 'recheados',
+    description:
+      'A casquinha de sempre, agora com recheio surpresa por dentro. Escolha o seu sabor.',
+    image: 'images/pao-de-queijo-recheado.jpg',
+    featured: true,
+    opcoes: ['Pernil', 'Presunto e Mussarela', 'Goiabada', 'Frango', 'Requeijão'],
   },
   {
     id: 'temperado',

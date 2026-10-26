@@ -158,6 +158,19 @@ biscoito provolone description) and the phrase **"miolo puxa-puxa"** (was in
 tradicional).
 Don't reintroduce either when rewriting product copy.
 
+## Pão de Queijo Recheado came back, and Ferradura is new (2026-10-26)
+
+**Recheado returned** with 5 flavours: pernil, presunto e mussarela, goiabada,
+frango, requeijão. The `recheados` category is back in `CATEGORIES`. It reuses
+`images/pao-de-queijo-recheado.jpg` — the real client photo kept on disk since the
+product was pulled in 2026-08-10 — rather than generating a new one, the same way
+`broa` shares one photo across its three flavours.
+
+**Ferradura is a new product** (large horseshoe-shaped pão de queijo, no flavour
+choice) with a generated photo — no real one exists yet. Catalogue is now 6
+products / 12 flavours; the hero's `.hero__prova` flavour-count stat was updated to
+match. Keep updating it when products change.
+
 ## Still open — confirm before promoting the site
 
 - **"Nossa história" is cut out entirely.** The client explicitly asked for a "como a
@@ -172,9 +185,14 @@ Don't reintroduce either when rewriting product copy.
 - **Geo coordinates** in the JSON-LD are Uberlândia city centre, not the exact address
 - **CEP** in the JSON-LD is `38400-000` (generic Uberlândia)
 - **Instagram/Facebook** — no `sameAs` links yet, client hasn't given handles
-- **AI-generated product images** — only *broa*, *temperado* and the step-1 freezer
+- **AI-generated product images** — *temperado*, *ferradura* and the step-1 freezer
   photo are still generated. Everything else is a real client photo.
   See `images/README.md`.
+- **Recheado flavour descriptions** (pernil, presunto e mussarela, goiabada, frango,
+  requeijão) are inferred from the flavour names, not written by the client.
+- **Ferradura** was put in the `tradicional` category by inference (same dough,
+  no filling, just a different bake shape) — confirm with the client if it should
+  be its own category.
 
 Confirmed correct by the client and **not** to be softened: *transporte refrigerado*
 and *assa em 20 minutos*.
